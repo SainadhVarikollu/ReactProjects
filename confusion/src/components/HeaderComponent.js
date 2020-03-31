@@ -21,7 +21,7 @@ class Header extends Component{
                      <div className="container">
                          <NavbarToggler onClick={this.toggleNav}/>
                      <NavbarBrand class="mr-auto" href="/">
-                           <img src="assets/images/logo.png" height="30" width="41"
+                           <img src="/assets/images/logo.png" height="30" width="41"
                            alt="Ristorante con Fusion"
                            />
                          </NavbarBrand>
@@ -35,7 +35,7 @@ class Header extends Component{
                             </NavItem>
                             <NavItem>
                                 <NavLink className="nav-link" to='/aboutus'>
-                                    <span className="fa fa-info fa-lg"></span>aboutus
+                                    <span className="fa fa-info fa-lg"></span>About us
                                 </NavLink>
                             </NavItem>
                             <NavItem>

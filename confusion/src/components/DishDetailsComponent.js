@@ -1,6 +1,6 @@
 import React from 'react';
-import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap';
-
+import {Card,CardImg,CardText,CardBody,CardTitle,Breadcrumb,BreadcrumbItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
  function RenderDish({dish}){
     if(dish!=null){
@@ -23,13 +23,13 @@ import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap';
       )
     }
 }
- function RenderComments({selected}){
-  if(selected!=null){
+ function RenderComments({comments}){
+  if(comments!=null){
       return(
           <div>
               <h4>Comments</h4>
                {
-                   selected.comments.map(insideComment=>{
+                   comments.map(insideComment=>{
                        return(
                            <div key={insideComment["id"]}>
                                <ul class="list-unstyled">
@@ -60,14 +60,29 @@ import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap';
 
 const DishDetails=(props)=>{
     return(
+        <div className="container">
+                <div className="row">
+        <Breadcrumb>
+         <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+         <BreadcrumbItem  active>{props.selected.name}</BreadcrumbItem>
+        </Breadcrumb>
+        <div className="col-12">
+           <h3>{props.selected.name}</h3>
+           <hr/>
+        </div>
+      </div>
         <div className="row">
+          
+             
              <div className="col-12 col-md-5">
              <RenderDish dish={props.selected}/>
              </div>
              <div className="col-12 col-md-5">
-             <RenderComments selected={props.selected}/>
+             <RenderComments comments={props.comments}/>
              </div>
          </div>
+        </div>
+        
          );
 }
    
