@@ -28,7 +28,7 @@ const minLength=(len)=>(val)=>(val) && (val.length >= len)
       )
     }
 }
- function RenderComments({comments}){
+ function RenderComments({comments,addComment,dishId}){
   if(comments!=null){
       return(
           <div>
@@ -46,7 +46,7 @@ const minLength=(len)=>(val)=>(val) && (val.length >= len)
                        );
                    })
                }
-              <CommentForm/>     
+              <CommentForm dishId={dishId} addComment={addComment}/>     
           </div>
       )
      
@@ -83,8 +83,7 @@ toggleModal(){
 }
 handleSubmit(values) {
 this.toggleModal();
-console.log('Current State is:'+JSON.stringify(values));
-alert('current state is :'+JSON.stringify(values));
+this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
 
 }
   render(){
@@ -105,7 +104,8 @@ alert('current state is :'+JSON.stringify(values));
                            
                                   <Col>
                                   <Label htmlFor="rating">Rating</Label>
-                                      <Control.select model=".rating" name="contactType"   
+                                      <Control.select model=".rating" name="contactType" 
+                                       id="rating"  
                                       className="form-control"
                                       >
                                       <option>1</option>
@@ -119,8 +119,9 @@ alert('current state is :'+JSON.stringify(values));
                             <Row className="form-group">
                            
                                   <Col>
-                                  <Label htmlFor="yourname">Your Name</Label>
-                                      <Control.text model=".yourname" name="yourname"
+                                  <Label htmlFor="author">Your Name</Label>
+                                      <Control.text model=".author" name="yourname"
+                                        id="author"
                                       placeholder="Your Name"   
                                       className="form-control"
                                       validators={{
@@ -129,7 +130,7 @@ alert('current state is :'+JSON.stringify(values));
                                       />
                                <Errors
                                   className="text-danger"
-                                  model=".yourname"
+                                  model=".author"
                                   show="touched"
                                   messages={{
                                       required:'Required',
@@ -144,7 +145,8 @@ alert('current state is :'+JSON.stringify(values));
                             
                                   <Col >
                                   <Label htmlFor="comment">Comment</Label>
-                                      <Control.textarea model=".comment" name="comment"   
+                                      <Control.textarea model=".comment" name="comment"
+                                      id="comment"   
                                       className="form-control" row ="6"
                                       />
                                   </Col>
@@ -191,7 +193,10 @@ const DishDetails=(props)=>{
              <RenderDish dish={props.selected}/>
              </div>
              <div className="col-12 col-md-5">
-             <RenderComments comments={props.comments}/>
+             <RenderComments comments={props.comments}
+        addComment={props.addComment}
+        dishId={props.selected.id}
+      />
              </div>
          </div>
         </div>

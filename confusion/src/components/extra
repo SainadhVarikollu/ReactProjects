@@ -236,48 +236,5 @@ class Contact extends Component {
 
 export default Contact;
 
-<Collapse isOpen={this.state.isNavOpen}>
-               
-               <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
-                     <ModalBody>
-                         <LocalForm onSubmit={(values)=>this.handleSubmit(values)}>
-                            <Row className="form-group">
-                            <Label htmlFor="rating">Username</Label>
-                                   <Col>
-                                       <Control.select model=".rating" name="contactType"   
-                                       className="form-control"
-                                       >
-                                       <option>1</option>
-                                       <option>2</option>
-                                       <option>3</option>
-                                       <option>4</option>
-                                       <option>5</option>
-                                       </Control.select>
-                                   </Col>
-                             </Row>
-                             <Row className="form-group">
-                            <Label htmlFor="yourname">Username</Label>
-                                   <Col>
-                                       <Control.text model=".yourname" name="yourname"   
-                                       className="form-control"
-                                       />
-                                   </Col>
-                             </Row>
-                             <Row className="form-group">
-                            <Label htmlFor="comment">Comment</Label>
-                                   <Col>
-                                       <Control.textarea model=".comment" name="comment"   
-                                       className="form-control"
-                                       />
-                                   </Col>
-                             </Row>
-                             <Button type="submit" value="submit" color="primary">Submit</Button>
-                         </LocalForm>
-                         
-                     </ModalBody>
-                </Modal>      
-                    
 
-               </Collapse>
             
