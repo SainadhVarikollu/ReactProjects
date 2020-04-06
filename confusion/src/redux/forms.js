@@ -1,3 +1,4 @@
+import * as ActionTypes from './ActionTypes';
 export const InitialFeedback={
     firstname: '',
     lastname: '',
@@ -7,3 +8,16 @@ export const InitialFeedback={
     contactType: 'Tel.',
     message: ''
 }
+
+
+export const Feedback = (state = { errMess: null, feedback:[]}, action) => {
+  switch (action.type) {
+    case ActionTypes.ADD_FEEDBACK:
+      return {...state, errMess: null, feedback: action.payload};
+
+    
+
+    default:
+      return state;
+  }
+};

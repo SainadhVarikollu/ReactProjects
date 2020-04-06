@@ -2,7 +2,9 @@ import React,{Component} from 'react';
 import {Card,CardImg,CardText,CardBody,CardTitle,Breadcrumb,BreadcrumbItem,Button,Row,Col,Label,Modal,ModalHeader,ModalBody,Nav,Collapse} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {Loading} from './LoadingComponent';
-import {LocalForm,Control,Errors} from 'react-redux-form'
+import {LocalForm,Control,Errors} from 'react-redux-form';
+import {baseUrl} from '../shared/baseUrl';
+import {FadeTransform,Fade,Stagger} from 'react-animation-components';
 const required=(val)=>val && val.length;
 const maxLength=(len)=>(val)=>(!val) || (val.length <=len)
 const minLength=(len)=>(val)=>(val) && (val.length >= len)
@@ -10,13 +12,19 @@ const minLength=(len)=>(val)=>(val) && (val.length >= len)
  function RenderDish({dish}){
     if(dish!=null){
          return(
+             <FadeTransform in 
+              transformProps={{
+                  exitTransform:'scale(0.5) translateY(50%)'
+              }}
+             >
            <Card>
-             <CardImg width="100%" src={dish.image} alt={dish.name} /> 
+             <CardImg width="100%" src={baseUrl+dish.image} alt={dish.name} /> 
              <CardBody>
              <CardTitle>{dish.name}</CardTitle>
          <CardText>{dish.description}</CardText>
              </CardBody>
            </Card>
+           </FadeTransform>
          )
     }
     else{
@@ -28,14 +36,16 @@ const minLength=(len)=>(val)=>(val) && (val.length >= len)
       )
     }
 }
- function RenderComments({comments,addComment,dishId}){
+ function RenderComments({comments,postComment,dishId}){
   if(comments!=null){
       return(
           <div>
               <h4>Comments</h4>
+              <Stagger in>
                {
                    comments.map(insideComment=>{
                        return(
+                           <Fade in>
                            <div key={insideComment["id"]}>
                                <ul class="list-unstyled">
                                  <li><p>{insideComment["comment"]}</p></li>
@@ -43,10 +53,12 @@ const minLength=(len)=>(val)=>(val) && (val.length >= len)
                                </ul>
                             
                             </div>
+                            </Fade>
                        );
                    })
                }
-              <CommentForm dishId={dishId} addComment={addComment}/>     
+               </Stagger>
+              <CommentForm dishId={dishId} postComment={postComment}/>     
           </div>
       )
      
@@ -83,7 +95,7 @@ toggleModal(){
 }
 handleSubmit(values) {
 this.toggleModal();
-this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
 
 }
   render(){
@@ -213,7 +225,7 @@ const DishDetails=(props)=>{
                  </div>
                  <div className="col-12 col-md-5">
                  <RenderComments comments={props.comments}
-            addComment={props.addComment}
+            postComment={props.postComment}
             dishId={props.selected.id}
           />
                  </div>

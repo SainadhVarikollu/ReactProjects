@@ -6,7 +6,7 @@ import { Comments } from './comments';
 import { Promotions } from './promotions';
 import { Leaders } from './leaders';
 import {createForms} from 'react-redux-form';
-import {InitialFeedback} from './forms'
+import {InitialFeedback,Feedback} from './forms'
 
 export const ConfigureStore=()=>{
       
@@ -16,6 +16,7 @@ export const ConfigureStore=()=>{
             comments: Comments,
             promotions: Promotions,
             leaders: Leaders,
+            result:Feedback,
             ...createForms({
                 feedback:InitialFeedback
             })

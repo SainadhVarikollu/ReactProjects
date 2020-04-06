@@ -236,5 +236,16 @@ class Contact extends Component {
 
 export default Contact;
 
+export const Feedback = (state = { errMess: null, feedback:[]}, action) => {
+  switch (action.type) {
+    case ActionTypes.ADD_FEEDBACK:
+      return {...state, errMess: null, feedback: action.payload};
 
+    
+
+    default:
+      return state;
+  }
+};
+this.props.postFeedback(values.firstname,values.lastname,values.telnum,values.email,values.agree,values.contactType,values.message)
             
